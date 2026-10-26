@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cines IMAX - Sistema Transaccional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <nav class="bg-black p-4 border-b border-yellow-500 flex justify-between items-center">
+        <h1 class="text-2xl font-bold tracking-widest text-yellow-500">IMAX DIGITAL</h1>
+        <div class="space-x-4 text-sm">
+            <button onclick="showSection('cartelera')" class="hover:text-yellow-400">Cartelera</button>
+            <button onclick="showSection('mapa')" class="hover:text-yellow-400">Mapa Asientos</button>
+            <button onclick="showSection('pago')" class="hover:text-yellow-400">Pago / QR</button>
+            <button onclick="showSection('admin')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold">Dashboard Admin</button>
+        </div>
+    </nav>
+
+    <main class="p-8 max-w-6xl mx-auto">
+        <!-- 1. CARTELERA -->
+        <section id="cartelera" class="space-y-6">
+            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2">Películas en Cartelera</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                    <div class="h-48 bg-gray-700 rounded mb-4 flex items-center justify-center text-gray-400 font-bold">POSTER INTERSTELLAR</div>
+                    <h3 class="text-xl font-bold text-yellow-400">Interstellar (10th Anniversary)</h3>
+                    <p class="text-sm text-gray-400">Clasificación: PG-13 | 169 min</p>
+                    <button onclick="showSection('mapa')" class="mt-4 w-full bg-yellow-500 text-black py-2 rounded font-bold hover:bg-yellow-400">Seleccionar Función</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MAPA DE ASIENTOS -->
+        <section id="mapa" class="hidden space-y-6">
+            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2">Selección de Asientos (Tiempo Real)</h2>
+            <div class="flex gap-4 mb-4 text-sm">
+                <span class="flex items-center gap-1"><div class="w-4 h-4 bg-green-500 rounded"></div> Disponible</span>
+                <span class="flex items-center gap-1"><div class="w-4 h-4 bg-yellow-500 rounded"></div> Bloqueado (2 min)</span>
+                <span class="flex items-center gap-1"><div class="w-4 h-4 bg-blue-500 rounded"></div> Seleccionado</span>
+                <span class="flex items-center gap-1"><div class="w-4 h-4 bg-gray-600 rounded"></div> Ocupado</span>
+            </div>
+            <div class="bg-gray-800 p-8 rounded-lg text-center">
+                <div class="bg-yellow-500 text-black py-1 mb-8 rounded font-bold tracking-widest">PANTALLA IMAX</div>
+                <div class="grid grid-cols-6 gap-3 max-w-md mx-auto">
+                    <button class="p-3 bg-green-500 rounded font-bold">A1</button>
+                    <button class="p-3 bg-blue-500 rounded font-bold">A2</button>
+                    <button class="p-3 bg-yellow-500 rounded font-bold">A3</button>
+                    <button class="p-3 bg-gray-600 rounded font-bold cursor-not-allowed">A4</button>
+                    <button class="p-3 bg-green-500 rounded font-bold">A5</button>
+                    <button class="p-3 bg-green-500 rounded font-bold">A6</button>
+                </div>
+                <button onclick="showSection('pago')" class="mt-8 bg-yellow-500 text-black px-8 py-3 rounded font-bold hover:bg-yellow-400">Continuar al Pago ($25.00)</button>
+            </div>
+        </section>
+
+        <!-- 3. PAGO Y QR -->
+        <section id="pago" class="hidden space-y-6">
+            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2">Checkout y Boleto Digital</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Pago Simulado (PCI-DSS Compliant)</h3>
+                    <input type="text" placeholder="Nombre en la Tarjeta" class="w-full p-2 mb-3 bg-gray-700 rounded border border-gray-600">
+                    <input type="text" placeholder="Número de Tarjeta **** **** **** 4242" class="w-full p-2 mb-3 bg-gray-700 rounded border border-gray-600">
+                    <button onclick="alert('¡Pago procesado con éxito en la base de datos!')" class="w-full bg-green-600 py-3 rounded font-bold hover:bg-green-500">Confirmar Transacción</button>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center border border-yellow-500">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-2">Entrada Digital Generada</h3>
+                    <p class="text-sm text-gray-400 mb-4">Función: Interstellar - Asiento A2</p>
+                    <div class="w-32 h-32 bg-white text-black mx-auto flex items-center justify-center font-mono text-xs border-4 border-black">
+                        [ CÓDIGO QR ]
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Hash: 8f9a2b...c3d4e5</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. DASHBOARD ADMIN -->
+        <section id="admin" class="hidden space-y-6">
+            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2">Panel de Control (RBAC)</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="bg-gray-800 p-4 rounded border-l-4 border-yellow-500">
+                    <p class="text-gray-400 text-sm">Ocupación Promedio</p>
+                    <p class="text-2xl font-bold">84.2%</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded border-l-4 border-green-500">
+                    <p class="text-gray-400 text-sm">Ingresos Totales (Mes)</p>
+                    <p class="text-2xl font-bold">$187,500</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded border-l-4 border-blue-500">
+                    <p class="text-gray-400 text-sm">Auditorías Registradas</p>
+                    <p class="text-2xl font-bold">1,420 logs</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
